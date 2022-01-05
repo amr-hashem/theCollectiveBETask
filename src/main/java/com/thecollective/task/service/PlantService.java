@@ -68,4 +68,17 @@ public class PlantService {
         }
     }
 
+    public List<Plant> getBottomPlants(Pageable pageable, String direction) {
+
+        List<Plant> fetchedPlants =  plantRepo.getBottomPlants(pageable);
+
+        if (direction.equals("desc")) {
+            return fetchedPlants;
+        }else {
+            return fetchedPlants.stream()
+                    .sorted(Comparator.comparingInt(Plant::getSequenceNumber))
+                    .collect(Collectors.toList());
+        }
+    }
+
 }

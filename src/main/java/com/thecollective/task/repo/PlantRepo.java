@@ -13,4 +13,7 @@ public interface PlantRepo extends JpaRepository<Plant, Integer> {
 
     @Query(value = "SELECT p from Plant p ORDER BY sequenceNumber ASC")
     List<Plant> getTopPlants(Pageable pageable);
+
+    @Query(value = "SELECT p from Plant p ORDER BY sequenceNumber DESC")
+    List<Plant> getBottomPlants(Pageable pageable);
 }

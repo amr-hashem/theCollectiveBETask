@@ -32,4 +32,18 @@ public class PlantController {
         return plantService.getTopPlants(pageable, direction);
 
     }
+
+    @GetMapping("/getBottomPlants")
+    public List<Plant> getBottomPlants(
+            @RequestParam(value = "limit", defaultValue = "5") Integer limit,
+            @RequestParam(value = "direction", defaultValue = "asc") String direction
+    ) {
+
+        limit = Math.min(limit, 500);
+
+        PageRequest pageable = PageRequest.of(0, limit);
+
+        return plantService.getBottomPlants(pageable, direction);
+
+    }
 }
