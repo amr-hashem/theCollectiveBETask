@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PlantRepo extends JpaRepository<Plant, Integer> {
@@ -16,4 +17,8 @@ public interface PlantRepo extends JpaRepository<Plant, Integer> {
 
     @Query(value = "SELECT p from Plant p ORDER BY sequenceNumber DESC")
     List<Plant> getBottomPlants(Pageable pageable);
+
+    List<Plant> findAllByPlantState(String plantState, Pageable pageable);
+
+    Optional<Plant> findBySequenceNumber(Integer sequenceNumber);
 }

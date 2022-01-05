@@ -5,10 +5,7 @@ import com.thecollective.task.service.PlantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -45,5 +42,21 @@ public class PlantController {
 
         return plantService.getBottomPlants(pageable, direction);
 
+    }
+
+    @GetMapping("/state")
+    public List<Plant> getPlantByState(
+            @RequestParam(value = "state") final String state,
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "limit", defaultValue = "10") Integer limit
+    ){
+        return plantService.getPlantByState(state, PageRequest.of(page, limit));
+    }
+
+    @GetMapping("/{plantId}")
+    public Plant getPlantDetails(
+            @PathVariable(value = "plantId") final Integer plantId
+    ) {
+        return plantService.getPlantDetails(plantId);
     }
 }

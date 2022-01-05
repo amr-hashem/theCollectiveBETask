@@ -11,10 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -81,4 +78,15 @@ public class PlantService {
         }
     }
 
+    public List<Plant> getPlantByState(String plantState, Pageable pageable) {
+        return plantRepo.findAllByPlantState(plantState, pageable);
+    }
+
+    public Plant getPlantDetails(Integer plantId) {
+
+        Optional<Plant> fetchedPlant = plantRepo.findBySequenceNumber(plantId);
+
+        return fetchedPlant.isPresent() ? fetchedPlant.get() : null;
+
+    }
 }
