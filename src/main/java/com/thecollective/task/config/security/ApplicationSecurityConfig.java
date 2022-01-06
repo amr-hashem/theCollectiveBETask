@@ -12,6 +12,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @Configuration
 @EnableWebSecurity
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -35,9 +39,14 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+
+        final List<String> paths = new ArrayList<>();
+        paths.add("/h2-console/**");
+        paths.addAll(Arrays.asList("/swagger-resources/**", "/swagger-ui/**"));
+
         web
                 .ignoring()
-                .antMatchers("/h2-console/**");
+                .antMatchers(paths.toArray(new String[paths.size()]));
     }
 
     @Override
