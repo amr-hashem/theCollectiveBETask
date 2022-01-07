@@ -19,3 +19,7 @@
 ### Access Data in aws 
 * [swagger](http://44.202.62.44:8080/swagger-ui.html#/)
 * [H2-console](http://44.202.62.44:8080/h2-console)
+
+#### ToDo
+* add redis for cache
+* add docker-compose file 
